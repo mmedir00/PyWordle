@@ -39,5 +39,7 @@ Popular wordle game made with python for terminal. Available in English and Span
 ## How to use
 
 Is a basic text GUI, first ypu select the language, then you have to write down a 5 letter word which exist in the language you are playing with. You have 5 tries to guess the word. a letter in green means the letter is in right place, yellow means the letter is in the word but not in the correct place, grey means the word does not contain that letter.
-Example (the word is ""):
+
+Example:
+
 ![Use Example](https://raw.githubusercontent.com/mmedir00/PyWordle/main/etc/Example.png)
