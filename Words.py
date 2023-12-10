@@ -1,3 +1,5 @@
+from Color import *
+
 import random
 
 class Words:
@@ -30,7 +32,7 @@ class Words:
                             'anexo', 'risco', 'hedor', 'craso', 'foral', 'sueco', 'hogar', 'sogas', 'balsa', 'hablo', 
                             'tomar', 'barro', 'yogur', 'sordo', 'horno', 'regio', 'huele', 'naveo', 'roper', 'falsa', 
                             'minar', 'capaz', 'brote', 'marco', 'virus', 'coser', 'manar', 'vario', 'zafio', 'pieza', 
-                            'tiara', 'matiz', 'trago', 'tirar', 'islar', 'tesor', 'fieza', 'larva', 'samba', 'vuela', 
+                            'tiara', 'matiz', 'trago', 'tirar', 'tesor', 'fieza', 'larva', 'samba', 'vuela', "llave"
                             'latir', 'torpe', 'ruedo', 'timar', 'tumba', 'pilar', 'saber', 'desde', 'jorar', 'oliva', 
                             'quedo', 'cinta', 'trono', 'pared', 'largo', 'sutil', 'salto', 'helio', 'estor', 'bicho', 
                             'fumar', 'plomo', 'ducho', 'siete', 'cenar', 'letra', 'doble']
@@ -38,6 +40,25 @@ class Words:
     def randomWord(self):
         return random.choice(self.wordList)
     
-    def getList(self, word):
-        return list(word)
-
+    def search(self, letter, word):
+        for i in range(len(word)):
+            if letter == word[i]:
+                return i
+            
+    def verify(self, inputWord, word):
+        inputList = list(inputWord)
+        wordList = list(word)
+        string = ["","","","",""]
+        greenList = wordList
+        for i in range(5):
+            if inputList[i] == greenList[i]:
+                string[i] = Color.green(inputList[i])
+                greenList[i] = " "
+        for i in range(5):
+            if inputList[i] in greenList and string[i] != Color.green(inputList[i]):
+                string[i] = Color.yellow(inputList[i])
+                greenList[self.search(inputList[i], greenList)] = " "
+        for i in range(5):
+            if string[i] == "":
+                string[i] = Color.grey(inputList[i])
+        return "".join(string)

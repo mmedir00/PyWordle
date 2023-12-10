@@ -1,3 +1,3 @@
-from textUI import *
+from TextUI import *
 
-textUI.init()
+TextUI.init()
