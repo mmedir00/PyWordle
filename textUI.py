@@ -1,5 +1,6 @@
 from words import *
 from color import *
+from raeSearch import *
 
 import os
 
@@ -19,10 +20,12 @@ class textUI:
         textUI.clean()
         print("Intente adivinar la palabra secreta!\n5 letras, 5 intentos\n")
         originalWordList = words.getList(words.randomWord())
-        print(originalWordList)
         counter = 0
         while counter < 5:
             users = str(input("\nIntento " + color.red(str(counter + 1)) + "\n>>> "))
+            if rae.search(users) == False:
+                print("La palabra no existe")
+                continue
             wordList = originalWordList.copy()
             inputList = list(users)
             if len(users) != 5:
