@@ -46,9 +46,9 @@ class TextUI:
                 elif userInput == originalWord:
 
                     if language == "1":
-                        print(f"<<< {Color.green(userInput)}\nCongratulations! You won!\nPress enter to continue...")
+                        input(f"<<< {Color.green(userInput)}\nCongratulations! You won!\nPress enter to continue...")
                     elif language == "2":
-                        print(f"<<< {Color.green(userInput)}\n¡Felicidades! ¡Ganaste!\nPresione enter para continuar...")
+                        input(f"<<< {Color.green(userInput)}\n¡Felicidades! ¡Ganaste!\nPresione enter para continuar...")
 
                     guessed = True
 

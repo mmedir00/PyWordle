@@ -24,7 +24,7 @@ class Words:
                             'rueda', 'danza', 'cuero', 'flota', 'giras', 'hongo', 'juego', 'lince', 'mambo', 'nunca', 
                             'oasis', 'pasta', 'ronda', 'tango', 'hueso', 'volar', 'setas', 'bello', 'crudo', 'demon', 
                             'etnia', 'fuego', 'gusto', 'monja', 'ileso', 'huida', 'leche', 'noble', 'oruga', 'pista', 
-                            'roble', 'salsa', 'terno', 'uvita', 'abraz', 'buche', 'cuota', 'delta', 'ejejo', 'fruta', 
+                            'roble', 'salsa', 'terno', 'abraz', 'buche', 'cuota', 'delta', 'ejejo', 'fruta', 
                             'gafas', 'herir', 'izote', 'jorco', 'mujer', 'nopal', 'ojear', 'meter', 'sable', 'tinta', 
                             'umbra', 'parce', 'bache', 'metro', 'reloj', 'medro', 'cabal', 'monte', 'lente', 'azote', 
                             'ceibo', 'fosil', 'nacer', 'aleta', 'monta', 'elevo', 'cerco', 'alojo', 'maple', 'merlo', 
