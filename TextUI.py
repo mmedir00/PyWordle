@@ -1,13 +1,14 @@
 from Words import *
 from Color import *
-from Rae import *
-from EnglishDictionary import *
+from WordValidator import *
 
 import os
 
 class TextUI:
     def init():
-        userInput = str(input("Welcome to WORDLE!\n1. English\n2. Español\n3. Quit\n>>> "))
+        TextUI.clean()
+        print(Color.purple("--WELCOME TO PYWORDLE!--") + "\nWebScrapping on " + Color.red("dle.rae.es") + " and "  + Color.blue("www.dictionary.com") + " for word validation\n" + Color.grey("by @MarcMeRu\n"))
+        userInput = str(input("1. English\n2. Español\n3. Quit\n>>> "))
         if userInput in ["3"]:
             exit()
         elif userInput in ["1", "2"]:
@@ -27,21 +28,21 @@ class TextUI:
             while counter < 5 and not guessed:
                 
                 if language == "1":
-                    userInput = str(input("\nAttempt " + Color.red(str(counter + 1)) + "\n>>> "))
+                    userInput = str(input("\nAttempt " + Color.blue(str(counter + 1)) + "\n>>> "))
                 elif language == "2":
-                    userInput = str(input("\nIntento " + Color.red(str(counter + 1)) + "\n>>> "))
-
-                if (not EnglishDictionary.search(userInput)) and (language == "1"):
-                    print("The word doesn't exist")
-                elif (not Rae.search(userInput)) and (language == "2"):
-                    print("La palabra no existe")
-
-                elif len(userInput) != 5:
-
+                    userInput = str(input("\nIntento " + Color.blue(str(counter + 1)) + "\n>>> "))
+                
+                if not WordValidator.validateLength(userInput):
                     if language == "1":
-                        print("The word must have 5 letters")
+                        print(Color.red("The word must have 5 letters"))
                     elif language == "2":
-                        print("La palabra debe tener 5 letras")
+                        print(Color.red("La palabra debe tener 5 letras"))
+                
+                elif not WordValidator.validateDictionary(userInput, language):
+                    if language == "1":
+                        print(Color.red("The word doesn't exist in the dictionary."))
+                    elif language == "2":
+                        print(Color.red("La palabra no existe en el diccionario."))
 
                 elif userInput == originalWord:
 
@@ -61,7 +62,7 @@ class TextUI:
                 if language == "1":
                     input(f"You lost! The word was {Color.red(originalWord)}\nPress enter to continue...")
                 elif language == "2":
-                    input("¡Perdiste! La palabra era " + Color.red(originalWord) + "Presione enter para continuar...")
+                    input(f"¡Perdiste! La palabra era {Color.red(originalWord)}\nPresione enter para continuar...")
 
 
     def clean():
