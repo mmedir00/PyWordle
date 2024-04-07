@@ -1,3 +1,7 @@
 from TextUI import *
 
-TextUI.init()
+def main() -> None:
+    TextUI()
+
+if __name__ == "__main__":
+    main()

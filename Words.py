@@ -1,10 +1,7 @@
-from Color import *
-
 import random
 
-class Words:
-    def __init__(self, language):
-
+class Word:
+    def __init__(self, language:int)-> None:
         if language == "1":
             self.wordList = ["apple", "table", "chair", "music", "green", "happy", "hello", "water", "watch", "cloud",
                                 "river", "beach", "tiger", "bacon", "storm", "chess", "plant", "stone", "grape", "lemon",
@@ -36,29 +33,57 @@ class Words:
                             'latir', 'torpe', 'ruedo', 'timar', 'tumba', 'pilar', 'saber', 'desde', 'jorar', 'oliva', 
                             'quedo', 'cinta', 'trono', 'pared', 'largo', 'sutil', 'salto', 'helio', 'estor', 'bicho', 
                             'fumar', 'plomo', 'ducho', 'siete', 'cenar', 'letra', 'doble']
-
-    def randomWord(self):
+            
+        self.word = self.random_word()
+    
+    def __eq__(self, value: str) -> bool:
+        return self.word == value
+    
+    def random_word(self)-> str:
         return random.choice(self.wordList)
     
-    def search(self, letter, word):
+    def search(self, letter:str, word:str)-> int:
         for i in range(len(word)):
             if letter == word[i]:
                 return i
             
-    def verify(self, inputWord, word):
+    def verify(self, inputWord:str)-> str:
         inputList = list(inputWord)
-        wordList = list(word)
+        wordList = list(self.word)
         string = ["","","","",""]
         greenList = wordList
+
         for i in range(5):
             if inputList[i] == greenList[i]:
                 string[i] = Color.green(inputList[i])
                 greenList[i] = " "
+
         for i in range(5):
             if inputList[i] in greenList and string[i] != Color.green(inputList[i]):
                 string[i] = Color.yellow(inputList[i])
                 greenList[self.search(inputList[i], greenList)] = " "
+
         for i in range(5):
             if string[i] == "":
                 string[i] = Color.grey(inputList[i])
+
         return "".join(string)
+
+class Color:
+    def grey(texto:str) -> str:
+        return f"\033[90m{texto}\033[0m"
+
+    def red(texto:str) -> str:
+        return f"\033[91m{texto}\033[0m"
+    
+    def green(texto:str) -> str:
+        return f"\033[92m{texto}\033[0m"
+
+    def yellow(texto:str) -> str:
+        return f"\033[93m{texto}\033[0m"
+
+    def blue(texto:str) -> str:
+        return f"\033[94m{texto}\033[0m"
+    
+    def purple(texto:str) -> str:
+        return f"\033[95m{texto}\033[0m"
