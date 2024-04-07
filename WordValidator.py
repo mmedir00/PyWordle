@@ -6,7 +6,8 @@ class WordValidator:
     def __init__(self, language: int):
         self.language = language
 
-    def validate_length(self, word: str) -> bool:
+    @staticmethod
+    def validate_length(word: str) -> bool:
         if len(word) == 5:
             return True
         else:
@@ -20,6 +21,7 @@ class WordValidator:
 
 
 class Dictionary:
+    @staticmethod
     def rae(word: str) -> bool:
         url = f'https://dle.rae.es/{word}'
         headers = {
@@ -36,6 +38,7 @@ class Dictionary:
         else:
             raise ConnectionError(f'Error al hacer la solicitud. Código de estado: {response.status_code}')
 
+    @staticmethod
     def english_dict(word: str) -> bool:
         url = f'https://www.dictionary.com/browse/{word}'
         headers = {
