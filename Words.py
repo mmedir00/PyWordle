@@ -53,17 +53,17 @@ class Word:
         input_list = list(input_word)
         word_list = list(self.word)
         string = ["", "", "", "", ""]
-        greenList = word_list
+        green_list = word_list
 
         for i in range(5):
-            if input_list[i] == greenList[i]:
+            if input_list[i] == green_list[i]:
                 string[i] = Color.green(input_list[i])
-                greenList[i] = " "
+                green_list[i] = " "
 
         for i in range(5):
-            if input_list[i] in greenList and string[i] != Color.green(input_list[i]):
+            if input_list[i] in green_list and string[i] != Color.green(input_list[i]):
                 string[i] = Color.yellow(input_list[i])
-                greenList[self.search(input_list[i], greenList)] = " "
+                green_list[self.search(input_list[i], green_list)] = " "
 
         for i in range(5):
             if string[i] == "":
