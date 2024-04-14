@@ -6,8 +6,7 @@ class WordValidator:
     def __init__(self, language: int):
         self.language = language
 
-    @staticmethod
-    def validate_length(word: str) -> bool:
+    def validate_length(self, word: str) -> bool:
         if len(word) == 5:
             return True
         else:
