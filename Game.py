@@ -22,23 +22,23 @@ class Game:
             "Intro": {1: "Try to guess the secret word!\n5 letters, 5 attempts.\n",
                       2: "Intente adivinar la palabra secreta!\n5 letras, 5 intentos.\n"},
 
-            "Attempt": {1: "Attempt number ",
-                        2: "Intento número "},
+            "Attempt": {1: "Attempt number {0}.",
+                        2: "Intento número {0}."},
 
-            "LengthError": {1: "The word must have 5 letters.",
-                            2: "La palabra debe tener 5 letras."},
+            "LengthError": {1: Color.red("\nThe word must have 5 letters.\n"),
+                            2: Color.red("\nLa palabra debe tener 5 letras.\n")},
 
-            "DictError": {1: "The word doesn't exist in the dictionary.",
-                          2: "La palabra no existe en el diccionario."},
+            "DictError": {1: Color.red("\nThe word doesn't exist in the dictionary.\n"),
+                          2: Color.red("\nLa palabra no existe en el diccionario.\n")},
 
-            "Won": {1: "Congratulations! You won!",
-                    2: "¡Felicidades! ¡Ganaste!"},
+            "Won": {1: Color.green("Congratulations! You won!"),
+                    2: Color.green("¡Felicidades! ¡Ganaste!")},
 
-            "Lost": {1: "You lost! The word was ",
-                     2: "¡Perdiste! La palabra era "},
+            "Lost": {1: Color.red("You lost! The word was {0}."),
+                     2: Color.red("¡Perdiste! La palabra era {0}.")},
 
-            "Press": {1: "Press enter to continue...",
-                      2: "Presione enter para continuar..."}
+            "Press": {1: Color.purple("Press enter to continue..."),
+                      2: Color.purple("Presione enter para continuar...")}
         }
 
     def game_loop(self) -> bool:
@@ -46,10 +46,10 @@ class Game:
         print(self.texts["Intro"][self.language])
 
         while not self.guessed and self.tries < 5:
-            print(self.texts["Attempt"][self.language] + Color.blue(str(self.tries)) + ".")
+            print(self.texts["Attempt"][self.language].format(Color.blue(str(self.tries + 1))))
             guess: str = input(">>> \r")
-
             if not self.validator.validate_length(guess):
+
                 print(f">>> {Color.red(guess)}")
                 print(self.texts["LengthError"][self.language])
 
@@ -67,7 +67,7 @@ class Game:
                 self.tries += 1
 
         if not self.guessed:
-            print(self.texts["Lost"][self.language] + Color.red(str(self.word)) + ".")
+            print(self.texts["Lost"][self.language].format(Color.red(str(self.word))))
 
         return self.guessed
 
