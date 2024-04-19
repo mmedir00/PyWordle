@@ -13,7 +13,7 @@ class WordValidator:
             return False
 
     def validate_dictionary(self, word: str) -> bool:
-        if self.language == "1":
+        if self.language == 1:
             return Dictionary.english_dict(word)
         else:
             return Dictionary.rae(word)
@@ -26,7 +26,7 @@ class Dictionary:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/91.0.4472.124 Safari/537.36'}
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
             existencia = soup.find_all(True, {"class": ["j"]})
@@ -43,14 +43,9 @@ class Dictionary:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/91.0.4472.124 Safari/537.36'}
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers)
         if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            existencia = soup.find_all(True, {"class": ["r9VbteV96t3N9RUC5Rkg"]})
-            if existencia:
-                return True
-            else:
-                return False
+            return True
         elif response.status_code == 404:
             return False
         else:

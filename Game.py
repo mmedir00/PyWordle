@@ -12,15 +12,16 @@ def clean() -> None:
 
 
 class Game:
-    def __init__(self, language: int) -> None:
-        self.word: Word = Word(language)
+    def __init__(self, language: int, day_word: bool = False) -> None:
+        self.attempts: int = 6
+        self.word: Word = Word(language, day_word)
         self.validator = WordValidator(language)
         self.language: int = language
         self.tries: int = 0
         self.guessed = False
         self.texts = {
-            "Intro": {1: "Try to guess the secret word!\n5 letters, 5 attempts.\n",
-                      2: "Intente adivinar la palabra secreta!\n5 letras, 5 intentos.\n"},
+            "Intro": {1: "Try to guess the secret word!\n5 letters, {} attempts.\n",
+                      2: "Intente adivinar la palabra secreta!\n5 letras, {} intentos.\n"},
 
             "Attempt": {1: "Attempt number {0}.",
                         2: "Intento número {0}."},
@@ -38,12 +39,16 @@ class Game:
                      2: Color.red("¡Perdiste! La palabra era {0}.")},
 
             "Press": {1: Color.purple("Press enter to continue..."),
-                      2: Color.purple("Presione enter para continuar...")}
+                      2: Color.purple("Presione enter para continuar...")},
+
+            "web": {
+                1: "https://www.dictionary.com/browse/{}",
+                2: "https://dle.rae.es/{}"}
         }
 
     def game_loop(self) -> bool:
         clean()
-        print(self.texts["Intro"][self.language])
+        print(self.texts["Intro"][self.language].format(self.attempts))
 
         while not self.guessed and self.tries < 5:
             print(self.texts["Attempt"][self.language].format(Color.blue(str(self.tries + 1))))
@@ -68,6 +73,8 @@ class Game:
 
         if not self.guessed:
             print(self.texts["Lost"][self.language].format(Color.red(str(self.word))))
+
+        print(self.texts["web"][self.language].format(self.word))
 
         return self.guessed
 

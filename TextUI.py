@@ -10,8 +10,8 @@ class TextUI:
             "Language": {0: Color.purple("Select the language. // Selecciona el Idioma.") + "\n1. English\n2. Español\n3. Quit\n>>>"},
 
             "GameMode": {
-                1: Color.purple("Select a game mode:") + "\n1-Common game.\n2-Difficult game.\n3-Hardcore game.\n4-Endless game.\n5-Go back.\n>>>",
-                2: Color.purple("Selecciona un modo de juego:") + "\n1-Normal.\n2-Dificil.\n3-Hardcore.\n4-Infinito.\n5-Volver.\n>>>"},
+                1: Color.purple("Select a game mode:") + "\n0-Daily word.\n1-Common game.\n2-Difficult game.\n3-Hardcore game.\n4-Endless game.\n5-Go back.\n>>>",
+                2: Color.purple("Selecciona un modo de juego:") + "\n0-Palabra diaria.\n1-Normal.\n2-Dificil.\n3-Hardcore.\n4-Infinito.\n5-Volver.\n>>>"},
 
             "GameOver": {
                 1: Color.red("Game Over.") + " You won {0}/{1} times.",
@@ -27,6 +27,7 @@ class TextUI:
 
             "Exit": {
                 3: "Exiting game.//Saliendo del juego."}
+
         }
         print(
             "{0}\nWebScrapping on {1} and {2} for word validation\n{3}".format(Color.purple("--WELCOME TO PYWORDLE!--"),
@@ -48,10 +49,11 @@ class TextUI:
             exit()
 
     def menu_game(self) -> None:
-        select = 0
-        while select not in range(1, 6):
+        select = -1
+        while select not in range(0, 6):
             select = int(input(self.texts["GameMode"][self.language]))
-
+        if select == 0:
+            self.day_word_game()
         if select == 1:
             self.common_game()
         elif select == 2:
@@ -68,8 +70,13 @@ class TextUI:
         game.game_loop()
         self.menu_game()
 
+    def day_word_game(self) -> None:
+        game = Game(self.language, True)
+        game.game_loop()
+        self.menu_game()
+
     def advanced_game(self, games: int) -> None:
-        count = 0;
+        count = 0
         loose = False
         while count < games and not loose:
             game = Game(self.language)
@@ -89,6 +96,7 @@ class TextUI:
             game = Game(self.language)
             if game.game_loop():
                 win_count += 1
+
             count += 1
             if str(input(self.texts["Continue"][self.language])).lower() in ["exit", "e"]:
                 print(self.texts["Game over."][self.language].format(count, win_count))
