@@ -26,9 +26,10 @@ class Word:
             words_number = 14752
         else:
             words_number = 10130
-        seed = ((time.localtime().tm_yday - 1) * time.localtime().tm_year) % words_number
+        seed = time.localtime().tm_yday + time.localtime().tm_year * 1000
+        random.seed(seed)
         with open(self.file_path, "r") as file:
-            word = file.readlines()[seed]
+            word = file.readlines()[random.randrange(0, words_number)]
         return word
 
     def random_word(self, language: int) -> str:

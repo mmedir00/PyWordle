@@ -23,10 +23,9 @@ class Dictionary:
     @staticmethod
     def rae(word: str) -> bool:
         url = f'https://dle.rae.es/{word}'
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                          'Chrome/91.0.4472.124 Safari/537.36'}
-        response = requests.get(url, headers)
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                                 'Chrome/58.0.3029.110 Safari/537.3'}
+        response = requests.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
             existencia = soup.find_all(True, {"class": ["j"]})
@@ -42,7 +41,9 @@ class Dictionary:
         url = f'https://www.dictionary.com/browse/{word}'
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                          'Chrome/91.0.4472.124 Safari/537.36'}
+                          'Chrome/91.0.4472.124 Safari/537.36',
+            'Accept-Language': 'es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3',
+            'Cookie': '__cflb=0H28uu4LW7gyBBnNGSSpSxx1a8En16bFfLqm4VhwYRZ'}
         response = requests.get(url, headers)
         if response.status_code == 200:
             return True
